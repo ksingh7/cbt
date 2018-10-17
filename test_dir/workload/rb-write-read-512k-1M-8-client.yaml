@@ -1,0 +1,32 @@
+cluster:
+  user: "head-admin"
+  head: "j18bxb-ospd"
+  clients: ["j18-ultram-compute-0","j18-ultram-compute-1","j18-ultram-compute-2","j18-ultram-compute-3","j18-ultram-compute-4","j18-ultram-compute-5","j18-ultram-compute-6","j18-ultram-compute-7"]
+  osds: ["j18-ultram-osd-compute-0", "j18-ultram-osd-compute-1", "j18-ultram-osd-compute-2"]
+  mons:
+    j18-ultram-controller-0:
+      a: "j18-ultram-controller-0"
+  osds_per_node: 4
+  iterations: 1
+  rebuild_every_test: False
+  use_existing: True
+  clusterid: "ceph"
+  tmp_dir: "/tmp/cbt"
+  pool_profiles:
+    replicated:
+      pg_size: 8
+      pgp_size: 8
+      replication: 3
+benchmarks:
+  radosbench:
+    op_size: [ 1048576 , 524288 ]
+    write_only: False
+    time: 300
+    concurrent_ops: [ 128 ]
+    concurrent_procs: 1
+    use_existing: True
+    pool_profile: "replicated"
+    pool_per_proc: False
+    target_pool: "rados-bench-cbt"
+    readmode: "seq"
+    osd_ra: [131072]
