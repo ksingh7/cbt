@@ -73,7 +73,7 @@ class Radosbench(Benchmark):
 
     def _run(self, mode, run_dir, out_dir):
         # We'll always drop caches for rados bench
-        self.dropcaches()
+        #self.dropcaches()
 
         if self.concurrent_ops:
             concurrent_ops_str = '--concurrent-ios %s' % self.concurrent_ops
@@ -133,10 +133,10 @@ class Radosbench(Benchmark):
             for i in xrange(self.concurrent_procs):
                 for node in settings.getnodes('clients').split(','):
                     node = node.rpartition("@")[2]
-                    self.cluster.rmpool('rados-bench-%s-%s' % (node, i), self.pool_profile)
+                   # self.cluster.rmpool('rados-bench-%s-%s' % (node, i), self.pool_profile)
                     self.cluster.mkpool('rados-bench-%s-%s' % (node, i), self.pool_profile)
         else: # the default behavior is to use a single Ceph storage pool for all rados bench processes
-            self.cluster.rmpool('rados-bench-cbt', self.pool_profile)
+           # self.cluster.rmpool('rados-bench-cbt', self.pool_profile)
             self.cluster.mkpool('rados-bench-cbt', self.pool_profile)
         monitoring.stop()
 
